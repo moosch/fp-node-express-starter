@@ -1,0 +1,7 @@
+{
+  "execMap": {
+    "js": "babel-node"
+  },
+  "ignore": ["*.test.js"],
+  "watch": ["*.*"]
+}
