@@ -3,7 +3,9 @@ import compressionMiddleware from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
 
-export default function (app) {
+// TODO: This could be safer
+
+const express = (app) => {
   app.use(helmet());
   app.use(compressionMiddleware());
   app.use(cors());
@@ -17,3 +19,5 @@ export default function (app) {
 
   return app;
 }
+
+export default express;

@@ -1,18 +1,25 @@
 import express from 'express';
+import Task from 'data.task';
 
-// Import more routers here
 import userRouter from './rest/user/user.router';
 
-const router = express.Router();
+const createRouter = () => new Task((rej, res) => res(express.Router()));
 
-const routers = {
-  '/users': userRouter,
+const attachRouters = (routes) =>  (router) => {
+  Object.keys(routes).forEach((route) => {
+    console.log(route)
+    router.use(route, routes[route]);
+  });
+  return router;
+}
+const addRouting = app => router => {
+  app.use(router);
+  return app;
 };
 
-// Router.use doesn't return anything and mutates it's prototype object so we can't be pure.
-Object.keys(routers).forEach((route) => {
-  router.use(route, routers[route]);
-});
-
+const router = app => createRouter()
+  .map(attachRouters({ '/users': userRouter }))
+  .map(addRouting(app))
 
 export default router;
+
