@@ -1,25 +1,30 @@
 import express from 'express';
 import Task from 'data.task';
-
 import userRouter from './rest/user/user.router';
 
-const createRouter = () => new Task((rej, res) => res(express.Router()));
+// createRouter :: Task Router
+const createRouter = new Task((rej, res) =>
+  res(express.Router()));
 
-const attachRouters = (routes) =>  (router) => {
-  Object.keys(routes).forEach((route) => {
-    console.log(route)
-    router.use(route, routes[route]);
+// connectRoute :: [Array] -> Router -> Router
+const connectRoute = routes => router => {
+  routes.forEach(route => {
+    router.use(route[0], route[1]);
   });
   return router;
 }
+
+// addRouting :: App -> Router -> App
 const addRouting = app => router => {
   app.use(router);
   return app;
 };
 
-const router = app => createRouter()
-  .map(attachRouters({ '/users': userRouter }))
+// router :: App -> App
+const router = app => createRouter
+  .map(connectRoute([
+    [ '/user', userRouter ],
+  ]))
   .map(addRouting(app))
 
 export default router;
-

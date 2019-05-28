@@ -11,8 +11,6 @@ const wrap = middlewareWrapper([
   [errors.UserNotFoundError, 404, 'USER_NOT_FOUND'],
 ]);
 
-// TODO: Plan out the flow of data better.
-
 router.get('/', wrap(controller.findAll));
 
 export default router;

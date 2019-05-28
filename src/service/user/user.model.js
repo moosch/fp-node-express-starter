@@ -3,6 +3,7 @@ import Task from 'data.task';
 import errors from './user.errors';
 
 const UserModel = {
+  // findAll :: {Int, Int} -> Task
   findAll: ({ limit, offset }) => new Task((reject, resolve) => {
     const users = [{
       "id":"1",
@@ -10,6 +11,7 @@ const UserModel = {
       "lastName":"Pick",
       "age":27,
     }];
+
     if (users) {
       resolve(users.slice(offset || 0, limit || 20))
     } else {

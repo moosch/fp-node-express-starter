@@ -4,11 +4,14 @@ import R from 'ramda';
 import UserModel from '../../service/user/user.model';
 
 export default {
-  findAll: (req) => {
+  // findAll :: Object -> Task
+  findAll: req => {
     /**
      * Task is like a lazy promise. Calling .fork will invoke it.
      * So calling a bunch of pure functions within a task,
      * then handling any errors in one place at .fork is easy!
+     * 
+     * We declare our controller's error/success responses to maintain scoped concerns
      */
     return new Task((rej, res) => {
       return UserModel.findAll({

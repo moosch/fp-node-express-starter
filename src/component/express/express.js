@@ -3,9 +3,12 @@ import compressionMiddleware from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
 
-// TODO: This could be safer
+/**
+ * TODO: This could be safer
+ */
 
-const express = (app) => {
+// express :: App -> App
+const express = app => {
   app.use(helmet());
   app.use(compressionMiddleware());
   app.use(cors());
@@ -14,7 +17,7 @@ const express = (app) => {
 
   app.use((req, res, next) => {
     res.header('Cache-Control', 'private, no-cache');
-    next();
+    return next();
   });
 
   return app;

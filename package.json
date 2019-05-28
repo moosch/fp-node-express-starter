@@ -20,12 +20,13 @@
     "data.future": "^2.3.0",
     "data.task": "^3.1.2",
     "express": "^4.16.4",
-    "fluture": "^11.0.1",
     "folktale": "^2.3.2",
     "helmet": "^3.16.0",
     "immutable-ext": "^1.1.5",
     "ramda": "^0.26.1",
     "sanctuary": "^2.0.0",
+    "sanctuary-def": "^0.20.0",
+    "sanctuary-type-identifiers": "^2.0.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

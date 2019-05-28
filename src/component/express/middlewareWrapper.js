@@ -1,8 +1,9 @@
 import R from 'ramda';
 
-const handleError = (errors) => (error) => {
+// handleError :: [Array] -> Error -> Object
+const handleError = errors => error => {
   // TODO: This is NOT functional. Remove state with Either and don't access err[0]
-  const results = R.filter((err) => err[0] === error.constructor)
+  const results = R.filter(err => err[0] === error.constructor)
   if (R.isEmpty(results)) {
     return {
       status: 500,
@@ -18,7 +19,9 @@ const handleError = (errors) => (error) => {
 
 // Here we invoke the lazy promise (Future) and handle any errors.
 // We can check for these errors in one place. Pretty sweet
-const middlewareWrapper = (errors) => (f) => (req, res, next) => {
+
+// middlewareWrapper :: [Array] -> Function -> (Object, Object, Function)
+const middlewareWrapper = errors => f => (req, res, next) => {
   return f(req).fork(
     ({ headers = [], status = 200, body = [] } = handleError(errors)) => 
       res.status(status).set(headers).json(body),
